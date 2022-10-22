@@ -1,0 +1,81 @@
+@import '../../../styles/variables.scss';
+.data-grid {
+	display: flex;
+	border-radius: 5px;
+	flex-wrap: wrap;
+
+	&-header-row,
+	&-content-row {
+		display: flex;
+		width: 100%;
+	}
+
+	&-content-row:hover {
+		background: $light-gray-color;
+	}
+
+	&-header-row-fixed {
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+	}
+
+	&-header-cell,
+	&-content-cell {
+		box-sizing: border-box;
+		flex-grow: 1;
+		justify-content: center;
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		width: inherit;
+
+		i {
+			margin: 5px;
+			position: relative;
+			cursor: pointer;
+
+			&.fa-sort,
+			&.fa-filter {
+				top: 2px;
+			}
+
+			&.fa-sort-up {
+				top: 5px;
+			}
+
+			&.fa-sort-down {
+				top: -1px;
+			}
+		}
+	}
+
+	&-content-col {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	&-header-cell {
+		font-weight: 900;
+		font-size: 0.875rem;
+		background-color: $gray-color;
+	}
+
+	&-no-data-section {
+		height: 250px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+
+	&.bordered {
+		border: 1px solid $border-color;
+	}
+
+	&-content-row-bordered {
+		&:not(:last-child) {
+			border-bottom: 1px solid $border-color;
+		}
+	}
+}

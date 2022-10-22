@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './styles/app.scss'
+import FileUploader from './components/FileUpload'
+import { STATIC_STRINGS } from './utils/Constants'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='container'>
+			<div className='container-main'>
+				<div className='header'>
+					<span className='header-text'>{STATIC_STRINGS.HEADER_TEXT}</span>
+				</div>
+				<div className='content'>
+					<div className='info-message font-700'>{STATIC_STRINGS.INFO_MESSAGE}</div>
+					<div className='file-uploader-container'>
+						<FileUploader />
+					</div>
+				</div>
+			</div>
+		</div>
+	)
 }
 
-export default App;
+export default App
