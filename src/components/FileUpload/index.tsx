@@ -7,15 +7,17 @@ const FileUploader = () => {
 	const [csvFile, setCsvFile] = useState()
 	const [csvArray, setCsvArray] = useState<any>()
 	const [headers, setHeaders] = useState<string[]>([])
+	const [totalPages, setTotalPages] = useState(0)
 
 	const submit = () => {
 		const file: any = csvFile
 		const reader = new FileReader()
 		reader.onload = function (e: any) {
 			const text: string = e.target.result
-			let { headers, dataArray } = Utils.processCSV(text)
+			let { headers, dataArray, totalPages } = Utils.processCSV(text)
 			setCsvArray(dataArray)
 			setHeaders(headers)
+			setTotalPages(totalPages)
 		}
 		reader.readAsText(file)
 	}
@@ -39,7 +41,7 @@ const FileUploader = () => {
 				<input type='file' accept='.csv' onChange={updateFile} />
 				<button onClick={parseCSVFile}>{STATIC_STRINGS.PARSE_CSV_BTN_TXT}</button>
 			</div>
-			<div className='datagrid-section'>{headers && csvArray && <DataGrid data={csvArray} headers={headers} bordered={true} />}</div>
+			<div className='datagrid-section'>{headers && csvArray && <DataGrid data={csvArray} headers={headers} bordered={true} totalPages={totalPages} />}</div>
 		</>
 	)
 }

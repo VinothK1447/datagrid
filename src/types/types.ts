@@ -8,4 +8,5 @@ export type DataGridProps = {
 	headers: String[]
 	theme?: String
 	bordered?: boolean
+	totalPages?: number
 }

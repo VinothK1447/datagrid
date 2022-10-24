@@ -19,23 +19,30 @@ class Utils {
 		let headers: string[] = str.slice(0, str.indexOf('\n')).split(delim)
 		const rows = str.slice(str.indexOf('\n') + 1).split('\n')
 		headers = headers.filter((header) => !Utils.isEmpty(header))
-		const dataArray: any = rows.map((row) => {
-			const values = row.split(delim)
-			const obj = headers.reduce((obj: any, header, i) => {
-				if (!Utils.isEmpty(header)) {
-					obj[header] = values[i]
-					return obj
-				}
-			}, {})
-			return obj
-		})
+		let dataArray: any = []
+		if (rows && rows[0]) {
+			dataArray = rows.map((row) => {
+				const values = row.split(delim)
+				const obj = headers.reduce((obj: any, header, i) => {
+					if (!Utils.isEmpty(header)) {
+						if (APP_CONSTANTS.DATE_PARSER.includes(header)) {
+							values[i] = new Intl.DateTimeFormat('en-IN').format(new Date(values[i]))
+						}
+						obj[header] = values[i]
+						return obj
+					}
+				}, {})
+				return obj
+			})
+		}
+		let totalPages = Math.ceil(dataArray.length / APP_CONSTANTS.ROWS_PER_PAGE)
 		// const paginatedData = Utils.paginateData(dataArray)
 		// return { headers, dataArray: paginatedData.pages }
-		return { headers, dataArray }
+		return { headers, dataArray, totalPages }
 	}
 
 	static paginateData = (dataArray: any) => {
-		let noOfPages = Math.ceil(dataArray.length / APP_CONSTANTS.ROWS_PER_PAGE)
+		let totalPages = Math.ceil(dataArray.length / APP_CONSTANTS.ROWS_PER_PAGE)
 		let res = []
 		let idx = 0
 		while (idx < dataArray.length) {
@@ -44,8 +51,35 @@ class Utils {
 		}
 
 		return {
-			totalPages: noOfPages,
+			totalPages: totalPages,
 			pages: res
+		}
+	}
+
+	static sortData = (data: any, sort: any) => {
+		if (!Utils.isEmpty(data)) {
+			const { field, order } = sort
+			data = data.sort((a: any, b: any) => {
+				if (APP_CONSTANTS.NUM_SORT.includes(field)) {
+					if (+a[field] < +b[field]) {
+						return order === 'asc' ? -1 : 1
+					}
+					if (+a[field] > +b[field]) {
+						return order === 'asc' ? 1 : -1
+					}
+				} else {
+					if (a[field] < b[field]) {
+						return order === 'asc' ? -1 : 1
+					}
+					if (a[field] > b[field]) {
+						return order === 'asc' ? 1 : -1
+					}
+				}
+				return 0
+			})
+			return data
+		} else {
+			return data
 		}
 	}
 }

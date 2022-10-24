@@ -15,7 +15,7 @@
 		flex-flow: column nowrap;
 
 		.header {
-			background: $header-bg;
+			background: $bg-black;
 			height: 80px;
 			&-text {
 				display: inline-block;
@@ -47,6 +47,13 @@
 				.datagrid-section {
 					overflow-x: scroll;
 					margin-top: 1rem;
+
+					.loading {
+						position: sticky;
+						bottom: 0;
+						background: $gray-color;
+						height: 50px;
+					}
 				}
 			}
 		}

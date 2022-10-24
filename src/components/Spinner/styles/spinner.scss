@@ -1,0 +1,62 @@
+@import '../../../styles/variables.scss';
+
+.spinner-wrapper {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	flex: 1 1 auto;
+	height: 100%;
+}
+.spinner {
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	border: 4px solid $bg-black;
+	box-sizing: border-box;
+	border-radius: 50%;
+	border-top: 4px solid $light-black;
+	-webkit-animation: spin 1s linear infinite; /* Safari */
+	animation: spin 1s linear infinite;
+}
+.spinner-reg {
+	width: 36px;
+	height: 36px;
+}
+
+.spinner-sm {
+	width: 16px;
+	height: 16px;
+}
+
+.spinner-lg {
+	width: 72px;
+	height: 72px;
+}
+
+.spinner-description {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 8px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

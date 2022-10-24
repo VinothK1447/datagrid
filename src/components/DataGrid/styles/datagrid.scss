@@ -24,13 +24,12 @@
 	&-content-cell {
 		box-sizing: border-box;
 		flex-grow: 1;
-		justify-content: center;
 		display: flex;
 		align-items: center;
 		padding: 10px;
 		width: inherit;
 
-		i {
+		span svg {
 			margin: 5px;
 			position: relative;
 			cursor: pointer;
@@ -55,10 +54,19 @@
 		flex-flow: row wrap;
 	}
 
+	&-content-cell {
+		justify-content: flex-start;
+		&:not(:first-child) {
+			justify-content: center;
+		}
+	}
+
 	&-header-cell {
+		justify-content: center;
 		font-weight: 900;
 		font-size: 0.875rem;
 		background-color: $gray-color;
+		cursor: pointer;
 	}
 
 	&-no-data-section {

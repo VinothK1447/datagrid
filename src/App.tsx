@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/app.scss'
 import FileUploader from './components/FileUpload'
 import { STATIC_STRINGS } from './utils/Constants'
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
 	return (
@@ -13,7 +14,9 @@ function App() {
 				<div className='content'>
 					<div className='info-message font-700'>{STATIC_STRINGS.INFO_MESSAGE}</div>
 					<div className='file-uploader-container'>
-						<FileUploader />
+						<ErrorBoundary>
+							<FileUploader />
+						</ErrorBoundary>
 					</div>
 				</div>
 			</div>
