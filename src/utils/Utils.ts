@@ -43,7 +43,7 @@ class Utils {
 
 	static paginateData = (dataArray: any) => {
 		let totalPages = Math.ceil(dataArray.length / APP_CONSTANTS.ROWS_PER_PAGE)
-		let res = []
+		let res: any = []
 		let idx = 0
 		while (idx < dataArray.length) {
 			res.push(dataArray.slice(idx, idx + APP_CONSTANTS.ROWS_PER_PAGE))

@@ -1,26 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+	"compilerOptions": {
+		"incremental": false,
+		"noEmit": true,
+		"target": "es5",
+		"module": "esnext", // commonjs destroys 'dynamic imports' which is used for code splitting
+		"noImplicitAny": false,
+		"preserveConstEnums": true,
+		"baseUrl": "./src",
+		"jsx": "react", // process JSX
+		"lib": ["dom", "es5", "es6", "es7", "es2017"],
+		"allowSyntheticDefaultImports": true, // no errors with commonjs modules interop
+		"esModuleInterop": true,
+		"allowJs": true, // include js files
+		"declaration": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": false,
+		"strict": true,
+		"strictFunctionTypes": false,
+		"pretty": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"resolveJsonModule": true
+	},
+	"include": ["src"]
 }

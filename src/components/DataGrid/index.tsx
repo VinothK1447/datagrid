@@ -289,17 +289,22 @@ function DataGrid(props: DataGridProps) {
 	}
 
 	const handleFilterApply = () => {
+		let res
 		let filterResult = allData.filter((elem: any) => {
 			switch (filters.filterOption) {
 				case '=':
-					return +elem[filters.filterField] === filters.filterValue
+					res = +elem[filters.filterField] === filters.filterValue
+					break
 				case '>':
-					return +elem[filters.filterField] > filters.filterValue
+					res = +elem[filters.filterField] > filters.filterValue
+					break
 				case '<':
-					return +elem[filters.filterField] < filters.filterValue
+					res = +elem[filters.filterField] < filters.filterValue
+					break
 				default:
 					break
 			}
+			return res
 		})
 		setFragmentedData(filterResult)
 		setShowSpinner(false)
