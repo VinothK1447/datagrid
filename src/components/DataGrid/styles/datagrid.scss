@@ -59,6 +59,14 @@
 		&:not(:first-child) {
 			justify-content: center;
 		}
+		.loss {
+			color: $error-color;
+			margin-left: 5px;
+		}
+		.gain {
+			color: $success-color;
+			margin-left: 5px;
+		}
 	}
 
 	&-header-cell {

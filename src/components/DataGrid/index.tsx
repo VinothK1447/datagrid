@@ -6,7 +6,7 @@ import './styles/datagrid.scss'
 import { APP_CONSTANTS, STATIC_STRINGS } from '../../utils/Constants'
 import Spinner from '../Spinner/Spinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faSearch, faSortUp, faSortDown, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faSearch, faSortUp, faSortDown, faCircleXmark, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { useOutsideClicks } from '../../utils/useOutsideClicks'
 
 function DataGrid(props: DataGridProps) {
@@ -141,6 +141,8 @@ function DataGrid(props: DataGridProps) {
 					{headers.map((_hdr: any, _indx: number) => (
 						<div className={classNames('data-grid-content-cell', theme && `${theme}-content-cell`)} key={`${_hdr}-${_indx}${_idx}`}>
 							{_data[_hdr]}
+							{_hdr === 'CLOSE' && _data['OPEN'] && _data['CLOSE'] && _data['OPEN'] > _data['CLOSE'] && <FontAwesomeIcon icon={faCaretDown} className={'loss'} />}
+							{_hdr === 'CLOSE' && _data['OPEN'] && _data['CLOSE'] && _data['OPEN'] < _data['CLOSE'] && <FontAwesomeIcon icon={faCaretUp} className={'gain'} />}
 						</div>
 					))}
 				</div>
