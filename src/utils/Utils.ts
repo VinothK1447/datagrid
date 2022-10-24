@@ -82,6 +82,17 @@ class Utils {
 			return data
 		}
 	}
+
+	static debouncer = (fn: Function, delay: number) => {
+		let timer: any
+		return function delayed(...args: any) {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
+				timer = null
+				fn(...args)
+			}, delay)
+		}
+	}
 }
 
 export default Utils
