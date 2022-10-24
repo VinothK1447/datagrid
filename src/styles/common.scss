@@ -37,3 +37,9 @@
 	border: 1px solid $light-black;
 	color: $bg-black;
 }
+
+.disabled {
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.5;
+}
