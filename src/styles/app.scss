@@ -43,6 +43,35 @@
 					display: flex;
 					flex-direction: row;
 					justify-content: center;
+					align-items: center;
+					gap: 1rem;
+
+					.file-input {
+						width: 0.1px;
+						height: 0.1px;
+						opacity: 0;
+						overflow: hidden;
+						position: absolute;
+						z-index: -1;
+					}
+					.file-input-icon {
+						color: $primary-color;
+						cursor: pointer;
+						margin: 0 2rem;
+
+						&:hover {
+							color: darken($color: $primary-color, $amount: 10%);
+						}
+					}
+
+					.file-upload {
+						&-success {
+							color: $success-color;
+						}
+						&-error {
+							color: $error-color;
+						}
+					}
 				}
 				.datagrid-section {
 					overflow-x: scroll;
