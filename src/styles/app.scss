@@ -6,31 +6,38 @@
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow: inherit;
 	font-family: $default-font-family;
-	font-size: $default-font-size;
+	font-size: $default-size;
+	background: var(--bg-color);
+	color: var(--text-color);
 
 	&-main {
 		display: flex;
 		flex-flow: column nowrap;
 
 		.header {
-			background: $bg-black;
+			background: var(--header-bg-color);
 			height: 80px;
 			&-text {
 				display: inline-block;
-				color: $text-color;
+				color: var(--header-text-color);
 				font-weight: $font-700;
 				font-size: 2.5rem;
-				padding: 1rem;
+				padding: $default-size;
+			}
+			svg {
+				float: right;
+				margin: 2.5rem;
+				color: var(--header-text-color);
 			}
 		}
 
 		.content {
 			display: flex;
 			flex-flow: column wrap;
-			padding: 1rem;
-			gap: 1rem;
+			padding: $default-size;
+			gap: $default-size;
 
 			.info-message {
 				display: flex;
@@ -44,7 +51,7 @@
 					flex-direction: row;
 					justify-content: center;
 					align-items: center;
-					gap: 1rem;
+					gap: $default-size;
 
 					.file-input {
 						width: 0.1px;
@@ -55,32 +62,32 @@
 						z-index: -1;
 					}
 					.file-input-icon {
-						color: $primary-color;
+						color: var(--primary-color);
 						cursor: pointer;
 						margin: 0 2rem;
 
 						&:hover {
-							color: darken($color: $primary-color, $amount: 10%);
+							color: darken($color: #0074bd, $amount: 10%);
 						}
 					}
 
 					.file-upload {
 						&-success {
-							color: $success-color;
+							color: var(--success-color);
 						}
 						&-error {
-							color: $error-color;
+							color: var(--error-color);
 						}
 					}
 				}
 				.datagrid-section {
-					overflow-x: scroll;
-					margin-top: 1rem;
+					// overflow-x: auto;
+					margin-top: $default-size;
 
 					.loading {
-						position: sticky;
-						bottom: 0;
-						background: $gray-color;
+						// position: sticky;
+						// bottom: 0;
+						background: var(--border-color);
 						height: 50px;
 					}
 
@@ -88,12 +95,12 @@
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-						padding: 1rem 0.5rem;
+						padding: $default-size 0.5rem;
 
 						.search-section {
 							.search-box {
 								padding: 0.5rem;
-								border: 1px solid $light-black;
+								border: 1px solid var(--light-black);
 								border-radius: 0.5rem;
 								width: 300px;
 
@@ -101,6 +108,8 @@
 									border: none;
 									outline: 0;
 									width: 260px;
+									background: transparent;
+									margin-left: 5px;
 								}
 							}
 						}
@@ -113,10 +122,11 @@
 						.filter-section {
 							.filters-container {
 								position: absolute;
-								border: 1px solid $gray-color;
-								box-shadow: 1px 1px 5px 1px $gray-color;
+								border: 1px solid var(--border-color);
+								box-shadow: 1px 1px 5px 1px var(--border-color);
 								border-radius: 5px;
-								background: $text-color;
+								background: var(--bg-color);
+								color: var(--text-color);
 								top: auto;
 								left: auto;
 								transform: translate(-90%, 3%);
@@ -125,44 +135,44 @@
 								min-height: 150px;
 
 								&-content {
-									padding: 1rem;
+									padding: $default-size;
 									max-height: 200px;
 									min-width: 250px;
 									overflow-y: auto;
 
 									div {
 										padding: 0.5rem;
-										width: calc(100% - 1rem);
+										width: calc(100% - $default-size);
 
 										select,
 										input[type='number'] {
 											padding: 0.25rem 0.5rem;
-											border: 1px solid $gray-color;
+											border: 1px solid var(--border-color);
 											border-radius: 6px;
 											width: inherit;
 										}
 
 										input[type='radio'] {
-											width: 1rem;
-											height: 1rem;
+											width: $default-size;
+											height: $default-size;
 
 											&:checked {
-												accent-color: $light-black;
-												background: $light-gray-color;
+												accent-color: var(--light-black);
+												background: var(--hover-color);
 											}
 										}
 									}
 								}
 
 								&-footer {
-									border-top: 1px solid $gray-color;
-									padding: 1rem;
+									border-top: 1px solid var(--border-color);
+									padding: $default-size;
 									display: flex;
 									justify-content: space-evenly;
 								}
 
 								&-item {
-									padding: 1rem;
+									padding: $default-size;
 								}
 							}
 						}

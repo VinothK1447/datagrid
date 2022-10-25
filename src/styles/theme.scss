@@ -1,0 +1,31 @@
+:root {
+	--bg-color: #fff;
+	--text-color: #333;
+	--light-black: #a6a6a6;
+	--border-color: #d3d3d3;
+	--tbl-head-bg-color: #ddd;
+	--hover-color: #eee;
+	--primary-color: #0074bd;
+	--success-color: #057533;
+	--error-color: #aa2020;
+	--ter-btn-txt-color: #333;
+	--pri-btn-txt-color: #fff;
+	--header-bg-color: #333;
+	--header-text-color: #eee;
+}
+
+[data-theme='dark'] {
+	--bg-color: #333;
+	--text-color: #fff;
+	--light-black: #a6a6a6;
+	--border-color: #d3d3d3;
+	--tbl-head-bg-color: #666;
+	--hover-color: #999;
+	--primary-color: #0074bd;
+	--success-color: #057533;
+	--error-color: #aa2020;
+	--ter-btn-txt-color: #eee;
+	--pri-btn-txt-color: #eee;
+	--header-bg-color: #eee;
+	--header-text-color: #333;
+}

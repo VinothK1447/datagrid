@@ -1,16 +1,7 @@
-// Colors
-$bg-black: #333;
-$text-color: #fff;
-$gray-color: #ddd;
-$light-gray-color: #eee;
-$border-color: #d3d3d3;
-$light-black: #a6a6a6;
-$primary-color: #0074bd;
-$success-color: #057533;
-$error-color: #aa2020;
+@import './theme.scss';
 
 // Font
 $default-font-family: 'Lato', sans-serif;
-$default-font-size: 1rem;
+$default-size: 1rem;
 $font-400: 400;
 $font-700: 700;

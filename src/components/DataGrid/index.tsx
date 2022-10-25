@@ -11,17 +11,19 @@ import { useOutsideClicks } from '../../utils/useOutsideClicks'
 
 function DataGrid(props: DataGridProps) {
 	const ROW_CAP = APP_CONSTANTS.ROWS_PER_PAGE
-	const { data, headers, totalPages = 0, theme, bordered } = props
+	const { data, headers, totalPages = 0, bordered } = props
+
 	// Refs for loader, search box, filter and last element indicator
 	const loader = useRef<any>(null)
 	const lastElemRef = useRef<HTMLDivElement>(null)
 	const searchElemRef = useRef<any>()
 	const filterBubble = useRef<HTMLDivElement>(null)
 
-	// State related to data values
+	// State related to data values & theme
 	const [allData, setAllData] = useState(data)
 	const [lastIndex, setLastIndex] = useState(0)
 	const [fragmentedData, setFragmentedData] = useState<{}[]>([])
+	const [theme, setTheme] = useState<any>('light')
 
 	// State related to pagination
 	const [pageNum, setPageNum] = useState(0)
@@ -85,6 +87,10 @@ function DataGrid(props: DataGridProps) {
 	useEffect(() => {
 		setFilters({ ...filters, filterField, filterOption, filterValue })
 	}, [filterField, filterOption, filterValue])
+
+	useEffect(() => {
+		setTheme(window?.localStorage?.getItem('theme'))
+	}, [])
 
 	const close = useCallback(() => setShowFilter(false), [])
 	useOutsideClicks(filterBubble, close)
