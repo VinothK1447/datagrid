@@ -256,6 +256,7 @@ function DataGrid(props: DataGridProps) {
 			}
 		})
 		setFragmentedData(searchResult)
+		setLastIndex(searchResult.length)
 		setShowSpinner(false)
 	}
 
@@ -264,6 +265,8 @@ function DataGrid(props: DataGridProps) {
 		if (!Utils.isEmpty(searchText)) {
 			setSearchText('')
 			searchElemRef.current.value = ''
+			setLastIndex(0)
+			setFragmentedData([])
 			sliceData()
 		}
 	}
