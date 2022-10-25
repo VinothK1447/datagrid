@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
-import { DataGridProps } from '../../types/types'
+import { DataGridProps, filterProps } from '../../types/types'
 import Utils from '../../utils/Utils'
 import './styles/datagrid.scss'
 import { APP_CONSTANTS, STATIC_STRINGS } from '../../utils/Constants'
@@ -35,10 +35,11 @@ function DataGrid(props: DataGridProps) {
 	// State related to search & filter
 	const [searchText, setSearchText] = useState('')
 	const [showFilter, setShowFilter] = useState(false)
-	const [filters, setFilters] = useState({ filterField: '', filterOption: '', filterValue: 0 })
+	const [filters, setFilters] = useState<filterProps>({ filterField: '', filterOption: '', filterValue: 0 })
 	const [filterField, setFilterField] = useState('')
 	const [filterOption, setFilterOption] = useState('')
 	const [filterValue, setFilterValue] = useState(0)
+	const [reslice, setReslice] = useState(false)
 
 	// Icons - search, sort, filter
 	const sortAsc = <FontAwesomeIcon icon={faSortUp} />
@@ -81,11 +82,21 @@ function DataGrid(props: DataGridProps) {
 	}, [fragmentedData, sort])
 
 	useEffect(() => {
+		if (reslice && Utils.isEmpty(fragmentedData) && Utils.isEmpty(filterField) && Utils.isEmpty(filterOption) && filterValue === 0) {
+			sliceData()
+		}
+	}, [fragmentedData, filters, reslice])
+
+	useEffect(() => {
 		setSearchText(searchText)
 	}, [searchText])
 
 	useEffect(() => {
-		setFilters({ ...filters, filterField, filterOption, filterValue })
+		if (!Utils.isEmpty(filterField) && !Utils.isEmpty(filterOption) && filterValue > 0) {
+			setFilters({ ...filters, filterField, filterOption, filterValue })
+		} else if (Utils.isEmpty(filterField) && Utils.isEmpty(filterOption) && filterValue === 0) {
+			setFilters({ ...filters, filterField: '', filterOption: '', filterValue: 0 })
+		}
 	}, [filterField, filterOption, filterValue])
 
 	useEffect(() => {
@@ -98,24 +109,19 @@ function DataGrid(props: DataGridProps) {
 
 	// Data slicing starts here
 	const sliceData = () => {
-		setTimeout(() => {
-			let currentData
-			if (lastElemRef?.current) {
-				currentData = [...fragmentedData, ...allData.slice(lastIndex, lastIndex + ROW_CAP)]
-			} else {
-				currentData = [...fragmentedData, ...allData.slice(0, ROW_CAP)]
-			}
-			currentData = Utils.sortData(currentData, sort)
-			setLastIndex(lastIndex + ROW_CAP)
-			setPageNum(pageNum + 1)
-			if (filters.filterField && filters.filterOption) {
-				handleFilterApply()
-			}
-			setFragmentedData(currentData)
-			if (pageNum === totalPages - 1) {
-				setShowSpinner(false)
-			}
-		}, 1000)
+		let currentData
+		if (lastElemRef?.current) {
+			currentData = [...fragmentedData, ...allData.slice(lastIndex, lastIndex + ROW_CAP)]
+		} else {
+			currentData = [...fragmentedData, ...allData.slice(0, ROW_CAP)]
+		}
+		currentData = Utils.sortData(currentData, sort)
+		setLastIndex(lastIndex + ROW_CAP)
+		setPageNum(pageNum + 1)
+		setFragmentedData(currentData)
+		if (pageNum === totalPages - 1) {
+			setShowSpinner(false)
+		}
 	}
 	// Data slicing ends here
 
@@ -138,6 +144,7 @@ function DataGrid(props: DataGridProps) {
 
 	const generateCells = () => {
 		return fragmentedData.map((_data: any, _idx: number) => {
+			console.log(_idx, '===', lastIndex - 1)
 			return (
 				<div
 					className={classNames('data-grid-content-row', bordered && `data-grid-content-row-bordered ${theme}-content-row-bordered`)}
@@ -288,15 +295,15 @@ function DataGrid(props: DataGridProps) {
 		setFilterField('')
 		setFilterOption('')
 		setFilterValue(0)
-		setFilters({ filterField: '', filterOption: '', filterValue: 0 })
 		setShowFilter(false)
-		setShowSpinner(false)
-		sliceData()
+		setLastIndex(0)
+		setFragmentedData([])
+		setReslice(true)
 	}
 
 	const handleFilterApply = () => {
 		let res
-		let filterResult = allData.filter((elem: any) => {
+		let filterResult = fragmentedData.filter((elem: any) => {
 			switch (filters.filterOption) {
 				case '=':
 					res = +elem[filters.filterField] === filters.filterValue
@@ -306,8 +313,6 @@ function DataGrid(props: DataGridProps) {
 					break
 				case '<':
 					res = +elem[filters.filterField] < filters.filterValue
-					break
-				default:
 					break
 			}
 			return res

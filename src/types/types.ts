@@ -3,6 +3,12 @@ export type GridHeaders = {
 	displayText: string
 }
 
+export type filterProps = {
+	filterField: string
+	filterOption: string
+	filterValue: number
+}
+
 export type DataGridProps = {
 	data: {}[]
 	headers: String[]
