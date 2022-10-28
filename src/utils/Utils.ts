@@ -26,7 +26,7 @@ class Utils {
 				const obj = headers.reduce((obj: any, header, i) => {
 					if (!Utils.isEmpty(header)) {
 						if (APP_CONSTANTS.DATE_PARSER.includes(header)) {
-							values[i] = new Intl.DateTimeFormat('en-IN').format(new Date(values[i]))
+							values[i] = values[i] ? new Intl.DateTimeFormat('en-IN').format(new Date(values[i])) : values[i]
 						}
 						obj[header] = values[i]
 						return obj

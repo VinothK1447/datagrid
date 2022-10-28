@@ -144,7 +144,7 @@ function DataGrid(props: DataGridProps) {
 
 	const generateCells = () => {
 		return fragmentedData.map((_data: any, _idx: number) => {
-			console.log(_idx, '===', lastIndex - 1)
+			// console.log(_idx, '===', lastIndex - 1)
 			return (
 				<div
 					className={classNames('data-grid-content-row', bordered && `data-grid-content-row-bordered ${theme}-content-row-bordered`)}
@@ -224,7 +224,7 @@ function DataGrid(props: DataGridProps) {
 				setSearchText('')
 			}
 			filterSearchTextValues(value)
-		}, 500),
+		}, 1000),
 		[]
 	)
 
